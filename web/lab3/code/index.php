@@ -11,7 +11,7 @@
     <ul>
         <li><a href="/task1.php">task1</a></li>
         <li><a href="/task2/task2.php">task2</a></li>
-        <li><a href="">task3</a></li>
+        <li><a href="/task3/index.php">task3</a></li>
     </ul>
 </body>
 </html>
