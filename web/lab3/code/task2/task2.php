@@ -21,7 +21,7 @@
 
     <div>
         <h1>Task 2B</h1>
-        <form action="/task2/register.php" method="post">
+        <form action="/task2/register2b.php" method="post">
             <label for="surname">Фамилия</label>
             <input type="text" name="surname" required >
             <br>
@@ -31,7 +31,30 @@
             <input type="submit" value="Save">
         </form>
         <br>
-        <a href="/task2/profile.php">Открыть личный кабинет</a>
+        <a href="/task2/profile2b.php">Открыть личный кабинет</a>
+    </div>
+
+    <div>
+        <h1>Task 2C</h1>
+        <form action="/task2/register2c.php" method="post">
+            <label for="name">Имя</label>
+            <input type="text" name="name" required>
+            <br>
+            <label for="age">Возраст</label>
+            <input type="text" name="age" required>
+            <br>
+            <label for="salary">Зарплата</label>
+            <input type="text" name="salary" required>
+            <br>
+            <label for="phone_number">Номер телефона</label>
+            <input type="text" name="phone_number" required>
+            <br>
+            <label for="totem">Тотемное животное</label>
+            <input type="text" name="totem" required>
+            <br>
+            <input type="submit" value="Save">
+        </form>
+        <a href="/task2/profile2c.php">Открыть личный кабинет</a>
     </div>
 </body>
 </html>
