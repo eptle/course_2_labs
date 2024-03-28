@@ -6,7 +6,7 @@
 </head>
 <body>
     <?php
-    echo 'task1(a)<br>';
+    echo '<h1>Task 1A</h1>';
 
     $str = 'ahb acb aeb aeeb adcb axeb';
     $regex1 = '/a..b/';
@@ -14,7 +14,7 @@
     print_r($result);
     echo '<br>';
     #-----
-    echo 'task1(b)<br>';
+    echo '<h1>Task 1B</h1>';
 
     $strWithNums = 'a1b2c3';
     $regex2 = '/[0-9]+/';
