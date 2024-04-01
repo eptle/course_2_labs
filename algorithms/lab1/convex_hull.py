@@ -5,7 +5,6 @@ from decimal import Decimal
 
 seed()
 set_of_points = list((randint(-20, 20), randint(-20, 20)) for i in range(50))
-set_of_points = [(-19, 18), (-4, -19), (-3, -2), (-1, -15)]
 
 def angle(a, b, c):
     '''ищет угол по трем точкам между векторами AB и AC''' 
@@ -13,7 +12,7 @@ def angle(a, b, c):
     mult_of_lens = (sqrt((b[0]-a[0])**2 + (b[1]-a[1])**2) * sqrt((c[0]-a[0])**2 + (c[1]-a[1])**2))
     if mult_of_lens != 0:
         cos = (((b[0]-a[0])*(c[0]-a[0])) + ((b[1]-a[1])*(c[1]-a[1]))) / mult_of_lens
-    return acos(round(cos, 3))
+    return acos(round(cos, 7))
 
 def gift_wrapping_algorithm(set_of_points):
     ''''''
