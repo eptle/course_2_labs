@@ -1,6 +1,6 @@
 <?php
 function redirectToHomePage(){
-    header('Location: /task3/index.php');
+    header('Location: /index.php');
     exit();
 }
 
