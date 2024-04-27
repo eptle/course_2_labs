@@ -1,0 +1,12 @@
+{
+    "name": "eptel/composer",
+    "authors": [
+        {
+            "name": "eptle",
+            "email": "btlk04@gmail.com"
+        }
+    ],
+    "require": {
+        "google/apiclient": "^2.15"
+    }
+}
