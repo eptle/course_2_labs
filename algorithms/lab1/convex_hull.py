@@ -1,7 +1,6 @@
 from random import randint, seed
 import matplotlib.pyplot as plt
 from math import sqrt, acos
-from decimal import Decimal
 
 seed()
 set_of_points = list((randint(-20, 20), randint(-20, 20)) for i in range(50))
@@ -15,7 +14,6 @@ def angle(a, b, c):
     return acos(round(cos, 7))
 
 def gift_wrapping_algorithm(set_of_points):
-    ''''''
     if len(set_of_points) <= 3:
         return set_of_points
     
