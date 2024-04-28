@@ -4,7 +4,8 @@ from math import sqrt, acos
 
 seed()
 set_of_points = list((randint(-20, 20), randint(-20, 20)) for i in range(50))
-
+#set_of_points = [(-19, 8), (-18, 3), (-16, -9), (-13, -20), (5, -12)]
+#set_of_points = [(-16, 7), (6, 3), (15, -2), (17, -15), (20, 11)]
 def angle(a, b, c):
     '''ищет угол по трем точкам между векторами AB и AC''' 
     cos = 0
@@ -24,6 +25,10 @@ def gift_wrapping_algorithm(set_of_points):
     remaining_points = list(set_of_points)
     while True:
         remaining_points.sort(key=lambda c: angle(a, b, c), reverse=True)
+
+        if len(convex_hull) == 1 and remaining_points[0] == convex_hull[0]:
+            remaining_points[0], remaining_points[1] = remaining_points[1], remaining_points[0]
+
         convex_hull.append(remaining_points[0])
         main_point = remaining_points.pop(0)
         a = main_point
