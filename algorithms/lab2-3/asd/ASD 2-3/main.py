@@ -1,12 +1,11 @@
-import queue
+from queue import Queue
 import matplotlib.pyplot as plt
 import networkx as nx
-import time
 
 
 def bfs(graph, start_node):
     visited = set()
-    q = queue.Queue()
+    q = Queue()
     q.put(start_node)
     order = []
 
@@ -45,9 +44,8 @@ def visualize_search(order, title, G, pos):
         plt.title(title)
         nx.draw(G, pos, with_labels=True, node_color=['r' if n == node else 'g' for n in G.nodes])
         plt.draw()
-        plt.pause(0.5)
+        plt.pause(0.01)
     plt.show()
-    #time.sleep(0.5)
 
 
 def generate_graph(n, m):
@@ -56,9 +54,11 @@ def generate_graph(n, m):
         if nx.is_connected(G):
             return G
 
+
 if __name__ == '__main__':
     G = generate_graph(20, 20)
-    #G.add_edges_from([('A', 'B'), ('A', 'C'), ('B', 'D'), ('B', 'E'), ('C', 'F'), ('C', 'G')])
+    # G.add_edges_from([('A', 'B'), ('A', 'C'), ('B', 'D'), ('B', 'E'), ('C', 'F'), ('C', 'G')])
     pos = nx.spring_layout(G)
 
-    visualize_search(dfs(G, 0), 'bfs', G, pos)
+    print(G[0])
+    visualize_search(bfs(G, 0), 'bfs', G, pos)

@@ -4,8 +4,8 @@ from math import sqrt, acos
 
 seed()
 set_of_points = list((randint(-20, 20), randint(-20, 20)) for i in range(50))
-#set_of_points = [(-19, 8), (-18, 3), (-16, -9), (-13, -20), (5, -12)]
-#set_of_points = [(-16, 7), (6, 3), (15, -2), (17, -15), (20, 11)]
+
+
 def angle(a, b, c):
     '''ищет угол по трем точкам между векторами AB и AC''' 
     cos = 0
@@ -14,12 +14,13 @@ def angle(a, b, c):
         cos = (((b[0]-a[0])*(c[0]-a[0])) + ((b[1]-a[1])*(c[1]-a[1]))) / mult_of_lens
     return acos(round(cos, 7))
 
+
 def gift_wrapping_algorithm(set_of_points):
     if len(set_of_points) <= 3:
         return set_of_points
     
-    set_of_points.sort(key=lambda x: x[0]) #сортируем все точки по иксу
-    main_point = set_of_points[0] #последняя найденная точка МВО
+    set_of_points.sort(key=lambda x: x[0]) # сортируем все точки по иксу
+    main_point = set_of_points[0] # последняя найденная точка МВО
     convex_hull = [main_point]
     a, b = main_point, (main_point[0], main_point[1]-10)
     remaining_points = list(set_of_points)
@@ -40,12 +41,13 @@ def gift_wrapping_algorithm(set_of_points):
     return convex_hull
 
 
-convex_hull = gift_wrapping_algorithm(set_of_points)
-print(convex_hull)
-print(set_of_points)
-points = convex_hull + [convex_hull[0]]
+if __name__ == '__main__':
+    convex_hull = gift_wrapping_algorithm(set_of_points)
+    print(convex_hull)
+    print(set_of_points)
+    points = convex_hull + [convex_hull[0]]
 
-plt.plot(*zip(*points), color='red')
-plt.scatter(*zip(*set_of_points), color='red')
+    plt.plot(*zip(*points), color='red')
+    plt.scatter(*zip(*set_of_points), color='red')
 
-plt.show()
+    plt.show()
