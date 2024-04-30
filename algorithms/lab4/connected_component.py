@@ -1,6 +1,3 @@
-from queue import Queue
-
-
 def matrix_to_graph(matrix):
     graph = dict()
     for i in range(len(matrix)):
@@ -9,34 +6,25 @@ def matrix_to_graph(matrix):
     return graph
 
 
-def bfs(graph, start, visited, components):
-    component = list()
-    queue = Queue()
-
-    component.append(start)
-    queue.put(start)
-
-    while not queue.empty():
-        node = queue.get()
-
-        for neighbour in graph[node]:
-            if neighbour not in visited:
-                queue.put(neighbour)
-                visited.add(neighbour)
-                component.append(neighbour)
-
-    components.append(component)
+def dfs(graph, start, visited, component):
+    for node in graph[start]:
+        if node not in visited:
+            component.append(node)
+            visited.add(node)
+            dfs(graph, node, visited, component)
 
 
-def connected_components(graph, method='bfs'):
+def connected_components(graph):
     components = list()
     visited = set()
 
     for node in graph.keys():
         if node not in visited:
+            component = list()
+            component.append(node)
             visited.add(node)
-            bfs(graph, node, visited, components)
-
+            dfs(graph, node, visited, component)
+            components.append(component)
     return max(components, key=len)
 
 
