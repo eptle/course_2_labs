@@ -15,7 +15,6 @@ def bfs(graph, start, visited, components):
 
     component.append(start)
     queue.put(start)
-    visited.add(start)
 
     while not queue.empty():
         node = queue.get()
@@ -29,12 +28,13 @@ def bfs(graph, start, visited, components):
     components.append(component)
 
 
-def connected_components(graph):
+def connected_components(graph, method='bfs'):
     components = list()
     visited = set()
 
     for node in graph.keys():
         if node not in visited:
+            visited.add(node)
             bfs(graph, node, visited, components)
 
     return max(components, key=len)
