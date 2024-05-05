@@ -16,7 +16,7 @@
         <label for="category">Выберите категорию</label>
         <select name="category" required>
             <?php
-            $categories = ['cars', 'estates', 'appliances', 'animals', 'other'];
+            $categories = ['cars', 'books', 'other'];
             foreach ($categories as $category) {?>
                 <option value=<?php echo $category;?>><?php
                     echo $category;?></option><?php }?>
