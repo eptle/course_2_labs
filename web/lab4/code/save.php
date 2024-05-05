@@ -13,19 +13,23 @@ $category = $_POST['category'];
 $title = $_POST['title'];
 $description = $_POST['description'];
 
-$filePath = "";
-$directories = ['categories', "/$category", "/$email"];
+$toSpreadsheet = [[$category, $email, $title, $description]];
 
-foreach ($directories as $dir) {
-    $filePath .= $dir;
-    if (!is_dir($filePath)) {
-        mkdir($filePath);
-        chmod($filePath, 0777);
-    }
-}
-$filePath .= "/$title.txt";
-if (false === file_put_contents($filePath, $description)) {
-    throw new Exception("Error while writing content to a file");
-}
-chmod($filePath, 0777);
+$googleAccountKeyFilePath = "key.json";
+
+putenv('GOOGLE_APPLICATION_CREDENTIALS=' . $googleAccountKeyFilePath);
+
+$client = new Google_Client();
+
+$client->useApplicationDefaultCredentials();
+$client->addScope('https://www.googleapis.com/auth/spreadsheets');
+$service = new Google_Service_Sheets($client);
+$spreadsheetId = "1dkUQaSFdAO7aTBs-xz4-eef9mVIjPq32YRBSZhX2Lm8";
+$spreadsheetName = "web4";
+
+$body = new Google_Service_Sheets_ValueRange(['values' => $toSpreadsheet]);
+
+$options = array('valueInputOption' => 'USER_ENTERED');
+
+$service->spreadsheets_values->append($spreadsheetId, $spreadsheetName, $body, $options);
 redirectToHomePage();

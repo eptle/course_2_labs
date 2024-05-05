@@ -16,13 +16,9 @@
         <label for="category">Выберите категорию</label>
         <select name="category" required>
             <?php
-            $categories = scandir('./categories');
-            foreach ($categories as $value) {
-                if ($value != '.' and $value != '..')
-                {
-                    echo "<option value=\"$value\">$value</option>";
-                }
-            }
+            $categories = ['cars', 'estates', 'appliances', 'animals', 'other'];
+            foreach ($categories as $category) {?>
+            <option value=<?php echo $category;?>><?php echo $category;
             ?>
         </select>
         <br>
@@ -48,27 +44,20 @@
         </thead>
         <tbody>
             <?php
-            for($i = 2; $i < count($categories); $i++) {
-                $category = $categories[$i];
-                $emails = scandir("./categories/{$category}");
-
-                for($j = 2; $j < count($emails); $j++) {
-                    $email = $emails[$j];
-                    $items = scandir("./categories/{$category}/{$email}");
-                    for($k = 2; $k < count($items); $k++) {
-                        $title = $items[$k];
-                        $description = file_get_contents("./categories/{$category}/{$email}/{$title}");
-                        $categoryDisplay = $category;
-                        $formatTitle = substr($title, 0, strlen($title) - 4);
-
-                        echo "<tr>";
-                        echo "<td>$email</td>";
-                        echo "<td>$categoryDisplay</td>";
-                        echo "<td>$formatTitle</td>";
-                        echo "<td>$description</td>";
-                        echo "</tr>";
-                    }
-                }
+            $id = '1dkUQaSFdAO7aTBs-xz4-eef9mVIjPq32YRBSZhX2Lm8';
+            $gid = 0;
+            $csv = file_get_contents('https://docs.google.com/spreadsheets/d/'.$id.'/export?format=csv&gid='.$gid);
+            $csv = explode("\r\n", $csv);
+            $array = array_map('str_getcsv', $csv);
+            foreach ($array as $row) {?>
+                <tr>
+                    <?php
+                    foreach ($row as $item) {?>
+                        <td><?php echo $item;?></td>
+                        <?php
+                    }?>
+                </tr>
+                <?php
             }
             ?>
         </tbody>
