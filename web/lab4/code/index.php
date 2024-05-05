@@ -18,8 +18,8 @@
             <?php
             $categories = ['cars', 'estates', 'appliances', 'animals', 'other'];
             foreach ($categories as $category) {?>
-            <option value=<?php echo $category;?>><?php echo $category;
-            ?>
+                <option value=<?php echo $category;?>><?php
+                    echo $category;?></option><?php }?>
         </select>
         <br>
         <label for="title">Заголовок</label>
