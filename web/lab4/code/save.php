@@ -1,4 +1,5 @@
 <?php
+include 'composer/vendor/autoload.php';
 function redirectToHomePage(){
     header('Location: /index.php');
     exit();
