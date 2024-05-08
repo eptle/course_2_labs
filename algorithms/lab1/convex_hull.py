@@ -19,8 +19,8 @@ def gift_wrapping_algorithm(set_of_points):
     if len(set_of_points) <= 3:
         return set_of_points
     
-    set_of_points.sort(key=lambda x: x[0]) # сортируем все точки по иксу
-    main_point = set_of_points[0] # последняя найденная точка МВО
+    set_of_points.sort(key=lambda x: x[0])  # сортируем все точки по иксу
+    main_point = set_of_points[0]  # последняя найденная точка МВО
     convex_hull = [main_point]
     a, b = main_point, (main_point[0], main_point[1]-10)
     remaining_points = list(set_of_points)
