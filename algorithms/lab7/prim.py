@@ -2,7 +2,7 @@ import math
 
 
 def matrix_to_graph(matrix):
-    V = tuple(i for i in range(len(matrix)))
+    V = tuple(range(len(matrix)))
     E = list()
     for i in range(len(matrix)):
         for j in range(len(matrix)):
@@ -12,32 +12,30 @@ def matrix_to_graph(matrix):
     return V, E
 
 
-def get_min_edge(E, U):
-    shortest_edge = (-1, -1, math.inf)
-    for mst_edges in U:
-        edges = list()
-        for vertex in E:
-            if (vertex[0] == mst_edges or vertex[1] == mst_edges) and (vertex[0] not in U or vertex[1] not in U):
-                edges.append(vertex)
-        shortest_edge = min(edges)
+def get_min(E, united):
+    edge = (-1, -1, math.inf)
+    min_edge = min(E, key=lambda x: x[2] if (x[0] in united) != (x[1] in united) else math.inf)
+    if min_edge[2] < edge[2]:
+        edge = min_edge
 
-    return shortest_edge
+    return edge
 
 
-def prim_MST(graph):
+def prim(graph):
     V, E = graph
-    united = {V[0]}
-    MST = list()
+    united = {1}
+    mst = []
 
     while len(united) < len(V):
-        min_edge = get_min_edge(E, united)
+        min_edge = get_min(E, united)
+
         if min_edge[2] == math.inf:
             break
 
-        MST.append(min_edge)
-        united.add(min_edge[0])
-        united.add(min_edge[1])
-    return MST
+        mst.append(min_edge)
+        united.add(min_edge[1]) if (min_edge[1] not in united) else united.add(min_edge[0])
+
+    return mst
 
 
 
@@ -47,4 +45,4 @@ if __name__ == '__main__':
 
     G = matrix_to_graph(M)
     print(G)
-    print(prim_MST(G))
+    print(prim(G))

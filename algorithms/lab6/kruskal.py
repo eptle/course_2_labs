@@ -12,44 +12,42 @@ def matrix_to_graph(matrix):
 class DSU:
     def __init__(self, n):
         self.parent = list(range(n))
-        self.rank = [0] * n
+        self.rank = [1] * n
 
     def find(self, x):
         if self.parent[x] != x:
             self.parent[x] = self.find(self.parent[x])
+            print(self.parent)
+            print(self.rank, end='\n\n')
         return self.parent[x]
 
-    def union(self, u, v):
-        root_u = self.find(u)
-        root_v = self.find(v)
+    def union(self, x, y):
+        root_x = self.find(x)
+        root_y = self.find(y)
 
-        if root_u == root_v:
-            return False
-
-        if self.rank[root_u] < self.rank[root_v]:
-            self.parent[root_u] = root_v
-        elif self.rank[root_u] > self.rank[root_v]:
-            self.parent[root_v] = root_u
-        else:
-            self.parent[root_v] = root_u
-            self.rank[root_u] += 1
-
-        return True
+        if root_x != root_y:
+            if self.rank[root_x] > self.rank[root_y]:
+                self.parent[root_y] = root_x
+            elif self.rank[root_x] < self.rank[root_y]:
+                self.parent[root_x] = root_y
+            else:
+                self.parent[root_y] = root_x
+                self.rank[root_x] += 1
 
 
 def kruskal(graph):
     V, E = graph
-    E.sort(key=lambda x: x[2])
-    uf = DSU(len(E))
-    min_spanning_tree = list()
+    dsu = DSU(len(V))
+    mst = []
 
-    for edge in E:
-        u, v, weight = edge
-        if uf.union(u, v):
-            min_spanning_tree.append(edge)
+    E.sort(key=lambda x: x[-1])
 
-    return min_spanning_tree
+    for u, v, weight in E:
+        if dsu.find(u) != dsu.find(v):
+            dsu.union(u, v)
+            mst.append((u, v, weight))
 
+    return mst
 
 
 if __name__ == '__main__':
