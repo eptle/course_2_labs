@@ -10,6 +10,16 @@ services:
     links:
       - php
   php:
-    image: php:8-fpm
+    build: .
+    depends_on:
+      - db
+    links:
+      - db
     volumes:
       - ./code:/code
+  db:
+    image: mysql:8.0
+    ports:
+      - '6603:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: helloworld
