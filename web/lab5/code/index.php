@@ -44,21 +44,26 @@
         </thead>
         <tbody>
             <?php
-            $id = '1dkUQaSFdAO7aTBs-xz4-eef9mVIjPq32YRBSZhX2Lm8';
-            $gid = 0;
-            $csv = file_get_contents('https://docs.google.com/spreadsheets/d/'.$id.'/export?format=csv&gid='.$gid);
-            $csv = explode("\r\n", $csv);
-            $array = array_map('str_getcsv', $csv);
-            foreach ($array as $row) {?>
+            $host = 'db';
+            $user = 'root';
+            $password = 'helloworld';
+            $database = 'web';
+
+            $mysqli = new mysqli($host, $user, $password, $database);
+
+            $link = $mysqli->query("SELECT email, category, title, description FROM ad");
+            while ($row = $link->fetch_assoc()) {?>
                 <tr>
                     <?php
-                    foreach ($row as $item) {?>
-                        <td><?php echo $item;?></td>
+                    foreach(['email', 'category', 'title', 'description'] as $item) {?>
+                        <td><?php echo $row[$item];?></td>
                         <?php
                     }?>
                 </tr>
                 <?php
             }
+            $link->close();
+            $mysqli->close();
             ?>
         </tbody>
     </table>
